@@ -1,8 +1,7 @@
-function operate(operand1, operand2, stringOperator) {
-    let operator = evaluateOperator(stringOperator);
+function operate(operand1, operand2, operator) {
     let result = operator(operand1, operand2);
-    console.log(`Result of ${operand1} ${stringOperator} ${operand2}: ${result}`);
-    return result
+    console.log(`Result of ${operand1} + ${operand2}: ${result}`);
+    return result;
 } 
 
 function add(num1, num2) {
@@ -33,26 +32,79 @@ function evaluateOperator(operator) {
     }
 }
 
-function startCalculating() {
-    console.log('You start the calculator anew');
-    num1 = Number(prompt("Enter your left operand"));
-    operator = prompt("Enter your operator");
-    num2 = Number(prompt("Enter your right operand"));
-
-    num1 = operate(num1, num2, operator);
+function pressButton(keyBtn) {
+    let displayText = btn1.textContent;
+    calculatorDisplay.textContent = displayText;
+    
+    if (num1 === undefined) {
+        num1 = Number(displayText);
+        console.log(typeof num1);
+    } else {
+        num2 = Number(displayText);
+        console.log(typeof num2);
+    }
 }
 
-function continueCalculating() {
-    console.log(`You continue calculating with the last result: ${num1}`);
-    operator = prompt("Enter your operator");
-    num2 = Number(prompt("Enter your right operand"));
-
-    num1 = operate(num1, num2, operator);   
-}
-
-let operator
+let operator;
 let num1, num2;
-const startBtn = document.querySelector('#start-button');
-startBtn.onclick = startCalculating;
-const continueBtn = document.querySelector('#continue-button');
-continueBtn.onclick = continueCalculating;
+const calculatorDisplay = document.querySelector('#calculator-display');
+
+const numberBtns = document.querySelectorAll('.number');
+numberBtns.forEach(numberBtn => {
+    numberBtn.addEventListener('click', () => {
+        let displayNumber = numberBtn.textContent;
+        calculatorDisplay.textContent = displayNumber;
+
+        if (num1 === undefined) {
+            num1 = Number(displayNumber);
+        } else {
+            num2 = Number(displayNumber);
+        }
+    });
+});
+
+const plusBtn = document.querySelector('#plus');
+plusBtn.addEventListener('click', event => {
+    let displayText = plusBtn.textContent;
+    operator = evaluateOperator(displayText);
+
+    // num1 = num2;
+});
+
+const equalBtn = document.querySelector('#equal');
+equalBtn.addEventListener('click', () => {
+    let result = operate(num1, num2, operator);
+    calculatorDisplay.textContent = result;
+
+    num1 = result;
+    num2 = 0;
+})
+
+// btn1.addEventListener('click', event => {
+//     let displayText = btn1.textContent;
+//     calculatorDisplay.textContent = displayText;
+    
+//     if (num1 === undefined) {
+//         num1 = Number(displayText);
+//         console.log(typeof num1);
+//     } else {
+//         num2 = Number(displayText);
+//         console.log(typeof num2);
+//     }
+// });
+
+// btn2.addEventListener('click', event => {
+//     let displayText = btn2.textContent;
+//     calculatorDisplay.textContent = displayText;
+
+//     if (num1 === undefined) {
+//         num1 = Number(displayText);
+//         console.log(typeof num1);
+//     } else {
+//         num2 = Number(displayText);
+//         console.log(typeof num2);
+//     }
+
+//     let result = operate(num1, num2, operator);
+//     calculatorDisplay.textContent = result;
+// });
