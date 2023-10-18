@@ -1,6 +1,8 @@
 function operate(operand1, operand2, operator) {
     let result = operator(operand1, operand2);
     console.log(`Result of ${operand1} + ${operand2}: ${result}`);
+    num1 = result;
+    num2 = 0;
     return result;
 } 
 
@@ -68,43 +70,16 @@ plusBtn.addEventListener('click', event => {
     let displayText = plusBtn.textContent;
     operator = evaluateOperator(displayText);
 
-    // num1 = num2;
+    if (num2 !== undefined) {
+        let result = operate(num1, num2, operator);
+        calculatorDisplay.textContent = result;
+        
+    }
 });
 
 const equalBtn = document.querySelector('#equal');
 equalBtn.addEventListener('click', () => {
     let result = operate(num1, num2, operator);
     calculatorDisplay.textContent = result;
-
-    num1 = result;
-    num2 = 0;
 })
 
-// btn1.addEventListener('click', event => {
-//     let displayText = btn1.textContent;
-//     calculatorDisplay.textContent = displayText;
-    
-//     if (num1 === undefined) {
-//         num1 = Number(displayText);
-//         console.log(typeof num1);
-//     } else {
-//         num2 = Number(displayText);
-//         console.log(typeof num2);
-//     }
-// });
-
-// btn2.addEventListener('click', event => {
-//     let displayText = btn2.textContent;
-//     calculatorDisplay.textContent = displayText;
-
-//     if (num1 === undefined) {
-//         num1 = Number(displayText);
-//         console.log(typeof num1);
-//     } else {
-//         num2 = Number(displayText);
-//         console.log(typeof num2);
-//     }
-
-//     let result = operate(num1, num2, operator);
-//     calculatorDisplay.textContent = result;
-// });
