@@ -1,0 +1,28 @@
+h1 {
+    font-size: 50px;
+    font-weight: 700;
+    text-align: center;
+    margin: 32px 0;
+}
+
+#container {
+    background-color: black;
+    border: 10px solid rgba(47,47,47,1);
+    width: fit-content;
+    border-radius: 4px;
+    margin: 32px auto;
+}
+
+#calculator-display {
+    background-color: #b2b9b7;
+    color: black;
+    margin: 5px;
+    padding: 5px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 400px;
+    height: 93px;
+    font-size: 80px;
+    font-family: monospace;
+}
