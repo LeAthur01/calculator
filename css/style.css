@@ -22,7 +22,7 @@ h1 {
     justify-content: flex-end;
     align-items: center;
     width: 400px;
-    height: 93px;
+    /* height: 93px; */
     font-size: 80px;
     font-family: monospace;
 }
