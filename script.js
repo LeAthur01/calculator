@@ -65,17 +65,22 @@ numberBtns.forEach(numberBtn => {
     });
 });
 
-const plusBtn = document.querySelector('#plus');
-plusBtn.addEventListener('click', event => {
-    let displayText = plusBtn.textContent;
-    operator = evaluateOperator(displayText);
+const operatorBtns = document.querySelectorAll('.operator');
+operatorBtns.forEach(operatorBtn => {
+    operatorBtn.addEventListener('click', event => {
+        let displayText = operatorBtn.textContent;
+        if (displayText === '=') {
+            return;
+        }
+        operator = evaluateOperator(displayText);
 
-    if (num2 !== undefined) {
-        let result = operate(num1, num2, operator);
-        calculatorDisplay.textContent = result;
-        
-    }
+        if (num2 !== undefined) {
+            let result = operate(num1, num2, operator);
+            calculatorDisplay.textContent = result;
+        }
+    });
 });
+
 
 const equalBtn = document.querySelector('#equal');
 equalBtn.addEventListener('click', () => {
