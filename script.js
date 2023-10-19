@@ -1,19 +1,20 @@
 function operate(operand1, operand2, operator) {
-    let result = operator(operand1, operand2);
+    let result = operator(Number(operand1),  Number(operand2));
     console.log(`Result of ${operand1} ${stringOperator} ${operand2}: ${result}`);
     if (isNaN(result)) {
         resetCalculator();
         return 'Try again'
     }
     num1 = result;
-    num2 = undefined;
+    num2 = '';
     return result;
 } 
 
 function resetCalculator() {
-    num1 = undefined;
-    num2 = undefined;
+    num1 = '';
+    num2 = '';
     operator = undefined;
+    anew = true;
 }
 
 function add(num1, num2) {
@@ -57,21 +58,27 @@ function pressButton(keyBtn) {
     }
 }
 
+let anew = true;
 let stringOperator;
 let operator;
-let num1, num2;
+let num1 = '';
+let num2 = '';
 const calculatorDisplay = document.querySelector('#calculator-display');
 
 const numberBtns = document.querySelectorAll('.number');
 numberBtns.forEach(numberBtn => {
     numberBtn.addEventListener('click', () => {
         let displayNumber = numberBtn.textContent;
-        calculatorDisplay.textContent = displayNumber;
+        if (anew) {
+            calculatorDisplay.textContent = displayNumber;
+            anew = false;
+        } else 
+            calculatorDisplay.textContent += displayNumber;
 
-        if (num1 === undefined) {
-            num1 = Number(displayNumber);
+        if (num1 === '' || operator === undefined) {
+            num1 += displayNumber;
         } else {
-            num2 = Number(displayNumber);
+            num2 += displayNumber;
         }
     });
 });
@@ -88,13 +95,14 @@ operatorBtns.forEach(operatorBtn => {
         }
 
         if (operator !== undefined) {
-            if (num2 !== undefined) {
+            if (num2 !== '') {
                 let result = operate(num1, num2, operator);
                 calculatorDisplay.textContent = result;
             }
         }
 
         operator = evaluateOperator(displayText);
+        anew = true;
         stringOperator = displayText;
     });
 });
