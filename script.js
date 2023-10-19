@@ -68,6 +68,13 @@ numberBtns.forEach(numberBtn => {
 const operatorBtns = document.querySelectorAll('.operator');
 operatorBtns.forEach(operatorBtn => {
     operatorBtn.addEventListener('click', event => {
+        if (operator !== undefined) {
+            if (num2 !== undefined) {
+                let result = operate(num1, num2, operator);
+                calculatorDisplay.textContent = result;
+            }
+        }
+
         let displayText = operatorBtn.textContent;
         // Zone out the equal button 
         // because it has the operator class selector that is for styling 
@@ -75,13 +82,7 @@ operatorBtns.forEach(operatorBtn => {
         if (displayText === '=') {
             return;
         }
-        
-        // Bind the event to the html elements that have class "operator"
         operator = evaluateOperator(displayText);
-        if (num2 !== undefined) {
-            let result = operate(num1, num2, operator);
-            calculatorDisplay.textContent = result;
-        }
     });
 });
 
