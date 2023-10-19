@@ -1,10 +1,20 @@
 function operate(operand1, operand2, operator) {
     let result = operator(operand1, operand2);
     console.log(`Result of ${operand1} ${stringOperator} ${operand2}: ${result}`);
+    if (isNaN(result)) {
+        resetCalculator();
+        return 'Try again'
+    }
     num1 = result;
     num2 = undefined;
     return result;
 } 
+
+function resetCalculator() {
+    num1 = undefined;
+    num2 = undefined;
+    operator = undefined;
+}
 
 function add(num1, num2) {
     return num1 + num2;
