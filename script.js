@@ -1,8 +1,8 @@
 function operate(operand1, operand2, operator) {
     let result = operator(operand1, operand2);
-    console.log(`Result of ${operand1} + ${operand2}: ${result}`);
+    console.log(`Result of ${operand1} ${stringOperator} ${operand2}: ${result}`);
     num1 = result;
-    num2 = 0;
+    num2 = undefined;
     return result;
 } 
 
@@ -28,7 +28,7 @@ function evaluateOperator(operator) {
     } else if (operator === "-") {
         return substract;
     } else if (operator === "*") {
-        return multiply
+        return multiply;
     } else if (operator === "/") {
         return divide;
     }
@@ -47,6 +47,7 @@ function pressButton(keyBtn) {
     }
 }
 
+let stringOperator;
 let operator;
 let num1, num2;
 const calculatorDisplay = document.querySelector('#calculator-display');
@@ -68,13 +69,6 @@ numberBtns.forEach(numberBtn => {
 const operatorBtns = document.querySelectorAll('.operator');
 operatorBtns.forEach(operatorBtn => {
     operatorBtn.addEventListener('click', event => {
-        if (operator !== undefined) {
-            if (num2 !== undefined) {
-                let result = operate(num1, num2, operator);
-                calculatorDisplay.textContent = result;
-            }
-        }
-
         let displayText = operatorBtn.textContent;
         // Zone out the equal button 
         // because it has the operator class selector that is for styling 
@@ -82,7 +76,16 @@ operatorBtns.forEach(operatorBtn => {
         if (displayText === '=') {
             return;
         }
+
+        if (operator !== undefined) {
+            if (num2 !== undefined) {
+                let result = operate(num1, num2, operator);
+                calculatorDisplay.textContent = result;
+            }
+        }
+
         operator = evaluateOperator(displayText);
+        stringOperator = displayText;
     });
 });
 
