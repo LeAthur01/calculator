@@ -106,3 +106,8 @@ equalBtn.addEventListener('click', () => {
     calculatorDisplay.textContent = result;
 })
 
+const resetBtn = document.querySelector('#reset');
+resetBtn.addEventListener('click', () => {
+    resetCalculator();
+    calculatorDisplay.textContent = ':)';
+})
