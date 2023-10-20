@@ -94,7 +94,7 @@ operatorBtns.forEach(operatorBtn => {
             return;
         }
 
-        if (anew) {
+        if (anew && displayText !== '=') {
             num1 = '0';
         }
 
@@ -114,8 +114,10 @@ operatorBtns.forEach(operatorBtn => {
 
 const equalBtn = document.querySelector('#equal');
 equalBtn.addEventListener('click', () => {
-    let result = operate(num1, num2, operator);
-    calculatorDisplay.textContent = result;
+    if (num2 !== '') {
+        let result = operate(num1, num2, operator);
+        calculatorDisplay.textContent = result;
+    }
 })
 
 const resetBtn = document.querySelector('#reset');
