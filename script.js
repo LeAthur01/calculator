@@ -7,6 +7,7 @@ function operate(operand1, operand2, operator) {
     }
     num1 = result;
     num2 = '';
+    operator = '';
     return result;
 } 
 
