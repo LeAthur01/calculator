@@ -8,6 +8,7 @@ function operate(operand1, operand2, operatorFunct) {
     num1 = result;
     num2 = '';
     operator = undefined;
+    anew = true;
     return result;
 } 
 
@@ -16,6 +17,7 @@ function resetCalculator() {
     num2 = '';
     operator = undefined;
     anew = true;
+    calculatorDisplay.textContent = ':)';
 }
 
 function add(num1, num2) {
@@ -95,7 +97,8 @@ operatorBtns.forEach(operatorBtn => {
             return;
         }
 
-        if (anew && displayText !== '=') {
+        // This conditional allow user to press the operator buttons before any operands and the first operand will have value 0
+        if (anew && num1 === '' && displayText !== '=') {
             num1 = '0';
         }
 
@@ -107,6 +110,7 @@ operatorBtns.forEach(operatorBtn => {
         }
 
         operator = evaluateOperator(displayText);
+        // This anew = true allow the calculator to display the next number being pressed
         anew = true;
         stringOperator = displayText;
     });
@@ -129,11 +133,13 @@ resetBtn.addEventListener('click', () => {
 
 const deleteBtn = document.querySelector('#delete');
 deleteBtn.addEventListener('click', () => {
-    if (num2 !== '' || (operator === undefined && num2 === '')) {
+    if (num2 !== '') {
         num2 = deleteDigit(num2);
+    } else if (anew) {
+        resetCalculator();
     } else if (operator === undefined && num1 !== '') {
-        num1 = deleteDigit(num1);
-    } 
+        num1 = deleteDigit(num1); 
+    }
 });
 
 function deleteDigit(number) {
