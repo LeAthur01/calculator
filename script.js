@@ -94,6 +94,10 @@ operatorBtns.forEach(operatorBtn => {
             return;
         }
 
+        if (anew) {
+            num1 = '0';
+        }
+
         if (operator !== undefined) {
             if (num2 !== '') {
                 let result = operate(num1, num2, operator);
