@@ -1,5 +1,5 @@
-function operate(operand1, operand2, operator) {
-    let result = operator(Number(operand1),  Number(operand2));
+function operate(operand1, operand2, operatorFunct) {
+    let result = operatorFunct(Number(operand1),  Number(operand2));
     console.log(`Result of ${operand1} ${stringOperator} ${operand2}: ${result}`);
     if (isNaN(result)) {
         resetCalculator();
@@ -7,7 +7,7 @@ function operate(operand1, operand2, operator) {
     }
     num1 = result;
     num2 = '';
-    operator = '';
+    operator = undefined;
     return result;
 } 
 
@@ -119,10 +119,32 @@ equalBtn.addEventListener('click', () => {
         let result = operate(num1, num2, operator);
         calculatorDisplay.textContent = result;
     }
-})
+});
 
 const resetBtn = document.querySelector('#reset');
 resetBtn.addEventListener('click', () => {
     resetCalculator();
     calculatorDisplay.textContent = ':)';
-})
+});
+
+const deleteBtn = document.querySelector('#delete');
+deleteBtn.addEventListener('click', () => {
+    if (num2 !== '' || (operator === undefined && num2 === '')) {
+        num2 = deleteDigit(num2);
+    } else if (operator === undefined && num1 !== '') {
+        num1 = deleteDigit(num1);
+    } 
+});
+
+function deleteDigit(number) {
+    if (number.length === 1 || number.length === 0) {
+        number = '';
+        calculatorDisplay.textContent = '0';
+        anew = true;
+    } else {
+        number = number.slice(0, number.length - 1);
+        calculatorDisplay.textContent = number;
+    }
+    console.log(number);
+    return number;
+}
